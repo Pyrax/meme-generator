@@ -20,7 +20,7 @@ const EditorActions = ({ className, onSave, ...props }: EditorActionsProps) => {
   const setText = useStore((state) => state.setText);
 
   const defaultText = {
-    text: 'Change my mind',
+    text: 'Challenge accepted',
     font: 'Arial',
     size: 24,
     color: '#000000',
@@ -32,6 +32,7 @@ const EditorActions = ({ className, onSave, ...props }: EditorActionsProps) => {
       position: 'top',
       offset: 12,
     } as TextElement);
+
   const setBottomText = () =>
     setText('bottom', {
       ...defaultText,
