@@ -1,6 +1,9 @@
+import { useStore } from '../../appStore';
 import FileInput from '../ui/FileInput';
 
 const SplashScreen = () => {
+  const setImage = useStore((state) => state.setImage);
+
   // File input event handler to update state with selected image file.
   const onSelectImage = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { files } = event?.target;
@@ -9,7 +12,11 @@ const SplashScreen = () => {
       const img = new Image();
       img.src = URL.createObjectURL(file);
       img.onload = () => {
-        // setImage
+        setImage({
+          element: img,
+          originalName: file.name,
+          originalType: file.type,
+        });
       };
     }
   };

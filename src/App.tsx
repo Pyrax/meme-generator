@@ -1,3 +1,4 @@
+import { useStore } from './appStore';
 import { FaFont, FaDownload } from 'react-icons/fa';
 import {
   Toolbar,
@@ -10,7 +11,7 @@ import SplashScreen from './components/blocks/SplashScreen';
 import Button from './components/ui/Button';
 
 const App = () => {
-  const image = false; // Set to true to test editor UI
+  const image = useStore((state) => state.image);
 
   return (
     <div className="grid grid-cols-3">
