@@ -62,7 +62,7 @@ const App = () => {
         </Toolbar>
       </aside>
       <section className="flex flex-col items-center lg:items-start lg:space-between min-h-screen pattern-dots pattern-3 pattern-slate-300">
-        <Workspace>
+        <Workspace className="w-full">
           {!image ? (
             <SplashScreen />
           ) : (
