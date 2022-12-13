@@ -78,7 +78,8 @@ const Button = ({
                   key={value}
                   className="flex first:rounded-t-lg last:rounded-b-lg hover:bg-indigo-100 focus-within:bg-indigo-100 active:bg-indigo-200 cursor-pointer"
                 >
-                  <button
+                  <span
+                    role="button"
                     className="px-4 py-1.5 grow"
                     onClick={() => {
                       if (!onDropdownSelect) {
@@ -88,7 +89,7 @@ const Button = ({
                     }}
                   >
                     {value}
-                  </button>
+                  </span>
                 </li>
               ))}
             </ul>
