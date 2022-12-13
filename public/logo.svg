@@ -1,0 +1,30 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 20010904//EN" "http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd">
+<!-- Created using Krita: http://krita.org -->
+<svg xmlns="http://www.w3.org/2000/svg" 
+    xmlns:xlink="http://www.w3.org/1999/xlink"
+    xmlns:krita="http://krita.org/namespaces/svg/krita"
+    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+    width="39.24pt"
+    height="39.24pt"
+    viewBox="0 0 39.24 39.24">
+<defs>
+  <linearGradient id="gradient0" gradientTransform="matrix(0.90630778703665 0.422618261740699 -0.422618261740699 0.90630778703665 0 0)" gradientUnits="objectBoundingBox" x1="0" y1="0" x2="1" y2="0" spreadMethod="pad">
+   <stop stop-color="#421e56" offset="0" stop-opacity="1"/>
+   <stop stop-color="#bc6083" offset="1" stop-opacity="1"/>
+  </linearGradient>
+  <linearGradient id="gradient1" gradientTransform="matrix(0.90630778703665 0.422618261740699 -0.422618261740699 0.90630778703665 0 0)" gradientUnits="objectBoundingBox" x1="0" y1="0" x2="1" y2="0" spreadMethod="pad">
+   <stop stop-color="#421e56" offset="0" stop-opacity="1"/>
+   <stop stop-color="#bc6083" offset="1" stop-opacity="1"/>
+  </linearGradient>
+  <linearGradient id="gradient2" gradientTransform="matrix(0.90630778703665 0.422618261740699 -0.422618261740699 0.90630778703665 0 0)" gradientUnits="objectBoundingBox" x1="0" y1="0" x2="1" y2="0" spreadMethod="pad">
+   <stop stop-color="#421e56" offset="0" stop-opacity="1"/>
+   <stop stop-color="#bc6083" offset="1" stop-opacity="1"/>
+  </linearGradient>
+ </defs>
+<path id="shape0" transform="translate(8.71862676153588, 27.1104744555787)" fill="#ffffff" fill-rule="evenodd" stroke="#ffffff" stroke-width="1.4436" stroke-linecap="square" stroke-linejoin="bevel" d="M0.127279 0L0 7.12764L6.7458 0.190919"/><rect id="shape1" transform="translate(2.52, 6.84)" fill="#ffffff" fill-rule="evenodd" stroke="#ffffff" stroke-width="1.4436" stroke-linecap="square" stroke-linejoin="bevel" width="34.2" height="20.16"/><g id="1b75568e-d83b-4414-bd67-d6631b9b3693" transform="matrix(0.430856789216664 0 0 0.430856789216664 -1.92284030006655 -0.998410086871958)" fill="none">
+  <path id="shape0" transform="translate(5, 12.4)" fill="url(#gradient0)" d="M7.031 0C3.188 0 0 3.189 0 7.032L0 49.5C0 53.343 3.188 56.531 7.031 56.531L17.086 56.531L17.297 68.273L17.438 75.199L22.43 70.383L36.844 56.531L82.969 56.531C86.813 56.531 90 53.343 90 49.5L90 7.032C90 3.189 86.812 0.001 82.969 0.001L7.031 0.001ZM7.031 3.715L82.969 3.715C83.561 3.715 86.36 4.451 86.36 7.301L86.36 49.77C86.655 52.161 83.561 53.191 82.969 53.191L34.418 53.191L33.539 54.035L20.244 67.621L20.216 56.135L20.181 53.182L17.193 53.182L7.032 53.191C3.606 53.191 3.901 49.618 3.901 49.026L3.901 6.557C3.9 5.965 5.078 3.126 7.031 3.715Z"/>
+  <path id="shape1" transform="translate(33.498, 20.701)" fill="url(#gradient1)" d="M0 9.1C0 6.28 2.04 4.06 4.439 4.06C6.959 4.06 8.879 6.04 8.879 9.1C8.879 11.98 7.139 14.02 4.379 14.02C1.919 14.02 0 11.98 0 9.1ZM0 28.719C0 25.959 2.04 23.74 4.439 23.74C6.959 23.74 8.879 25.72 8.879 28.719C8.879 31.659 7.139 33.699 4.379 33.699C1.919 33.699 0 31.659 0 28.719ZM16.714 38.98C21.322 33.939 26.41 24.53 26.41 13.153C26.41 8.353 26.17 4.273 24.25 0L28.715 0C30.444 3.6 31.211 8.208 31.211 13.153C31.211 25.202 25.594 34.563 21.61 38.98Z"/>
+  <path id="shape2" transform="translate(47.943, 19.701)" fill="url(#gradient2)" d="M7.61 40.98L0 40.98L1.531 39.305C6.093 34.316 10.966 25.089 10.966 14.153C10.966 9.868 10.808 5.669 8.894 1.41L8.26 0L14.9 0L15.172 0.567C16.869 4.102 17.767 8.8 17.767 14.152C17.767 25.629 12.674 35.364 7.909 40.649ZM4.427 38.98L6.716 38.98C11.146 33.902 15.766 24.827 15.766 14.153C15.766 9.385 15.029 5.201 13.628 2L11.295 2C12.826 6.116 12.965 10.103 12.965 14.153C12.965 24.533 8.781 33.464 4.427 38.98Z"/>
+ </g>
+</svg>
