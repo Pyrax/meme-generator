@@ -22,7 +22,7 @@ const SplashScreen = () => {
   };
 
   return (
-    <div className="flex flex-col items-center gap-1 max-w-prose p-5 bg-slate-50 shadow-md border border-blue-400 rounded-lg">
+    <div className="flex flex-col items-center gap-1 w-full max-w-prose p-5 bg-slate-50 shadow-md border border-blue-400 rounded-lg">
       Select an image to edit:{' '}
       <FileInput onChange={onSelectImage} accept="image/*" />
     </div>
