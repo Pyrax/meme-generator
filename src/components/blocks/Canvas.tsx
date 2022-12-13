@@ -18,6 +18,39 @@ export type CanvasRef = {
   }) => void;
 };
 
+/**
+ * Draws line-wrapping text on a canvas
+ */
+const fillWrappingText = (
+  context: CanvasRenderingContext2D,
+  text: string,
+  x: number,
+  y: number,
+  maxWidth: number,
+  lineHeight: number
+) => {
+  let current = '';
+  let yPos = y;
+  const words = text.split(' ');
+
+  for (let n = 0; n < words.length; n++) {
+    const withNextWord = current + words[n] + ' ';
+    const { width } = context.measureText(withNextWord);
+
+    // Line exceeds width, so all previous words should be drawn and the
+    // next word should go in the next line.
+    if (width > maxWidth) {
+      context.fillText(current, x, yPos);
+      yPos += lineHeight;
+      current = words[n] + ' ';
+    } else {
+      current = withNextWord;
+    }
+  }
+  // Draw remaining text.
+  context.fillText(current, x, yPos);
+};
+
 const Canvas = React.forwardRef<CanvasRef, CanvasProps>(
   ({ image, texts }, forwardedRef) => {
     const innerRef = React.useRef<HTMLCanvasElement>(null);
@@ -53,14 +86,14 @@ const Canvas = React.forwardRef<CanvasRef, CanvasProps>(
 
           texts.forEach(({ text, size, font, color, position, offset }) => {
             const yPos = position === 'top' ? size : image.height - size / 2;
-
-            // TODO:  auto line-break
+            const [x, y] = [image.width / 2, yPos + offset];
 
             context.font = `${size}px ${font}`;
             context.fillStyle = color;
             context.textAlign = 'center';
             context.textBaseline = 'middle';
-            context.fillText(text, image.width / 2, yPos + offset, image.width);
+
+            fillWrappingText(context, text, x, y, image.width, size);
           });
         }
       }
