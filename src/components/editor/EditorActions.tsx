@@ -12,7 +12,7 @@ export type EditorActionsProps = {
 const EXPORT_FILE_TYPES = [
   { extension: 'jpg', mimeType: 'image/jpeg' },
   { extension: 'png', mimeType: 'image/png' },
-  { extension: 'gif', mimeType: 'image/gif' }, // TODO: Fix gif
+  { extension: 'gif', mimeType: 'image/gif' },
 ];
 
 const EditorActions = ({ className, onSave, ...props }: EditorActionsProps) => {
