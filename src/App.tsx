@@ -23,7 +23,7 @@ const App = () => {
   const canvasRef = React.useRef<CanvasRef>(null);
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-[minmax(theme(maxWidth.lg),35%)_auto]">
+    <div className="grid grid-cols-1 lg:grid-cols-[minmax(theme(maxWidth.lg),35%)_auto] min-h-screen">
       <aside className="flex justify-center lg:justify-end self-start h-full relative bg-gradient-to-l from-indigo-50 to-sky-50">
         <Toolbar>
           <div className="divide-y mx-4 py-4">
@@ -61,7 +61,7 @@ const App = () => {
           )}
         </Toolbar>
       </aside>
-      <section className="flex flex-col min-h-screen pattern-dots pattern-3 pattern-slate-300">
+      <section className="flex flex-col pattern-dots pattern-3 pattern-slate-300">
         <Workspace className="w-full items-center lg:items-start lg:space-between">
           {!image ? (
             <SplashScreen />
