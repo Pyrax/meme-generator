@@ -7,15 +7,14 @@ export type CanvasProps = {
 };
 
 export type CanvasRef = {
-  saveImage: ({
-    name,
-    extension,
-    mimeType,
-  }: {
-    name?: string;
-    extension?: string;
-    mimeType?: string;
-  }) => void;
+  saveImage: ({ name, extension, mimeType }: SaveFileType) => void;
+};
+
+export type SaveFileType = FileType & { name?: string };
+
+export type FileType = {
+  extension: string;
+  mimeType: string;
 };
 
 /**

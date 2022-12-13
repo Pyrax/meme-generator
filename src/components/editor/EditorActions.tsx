@@ -3,13 +3,14 @@ import { useStore } from '../../appStore';
 import { FaFont, FaDownload } from 'react-icons/fa';
 import { TextElement } from '../../slices/textSlice';
 import Button from '../ui/Button';
+import { FileType } from '../blocks/Canvas';
 
 export type EditorActionsProps = {
   className?: string;
-  onSave: Function;
+  onSave: (file: FileType) => void;
 };
 
-const EXPORT_FILE_TYPES = [
+const EXPORT_FILE_TYPES: FileType[] = [
   { extension: 'jpg', mimeType: 'image/jpeg' },
   { extension: 'png', mimeType: 'image/png' },
   { extension: 'gif', mimeType: 'image/gif' },
