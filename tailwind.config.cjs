@@ -7,7 +7,19 @@ const {
 module.exports = {
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
   theme: {
-    extend: {},
+    extend: {
+      keyframes: {
+        ping: {
+          '90%, 100%': {
+            transform: 'scale(1.2)',
+            opacity: 0,
+          },
+        },
+      },
+      animation: {
+        ping: 'ping 1s cubic-bezier(0, 0, 0.4, 1) infinite',
+      },
+    },
   },
   plugins: [
     // Custom plugin for background patterns:
