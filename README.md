@@ -5,7 +5,7 @@ Image editor for memes developed as [part of a frontend coding challenge](https:
 ## Links
 
 - [Live demo](https://pyrax-challenge.netlify.app/)
-- Documentation of result: [Aufgabenergebnis (german)](./blob/main/Aufgabenergebnis.md)
+- Documentation of result: [Aufgabenergebnis (german)](./Aufgabenergebnis.md)
 
 ## Get started
 
