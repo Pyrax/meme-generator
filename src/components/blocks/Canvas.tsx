@@ -17,16 +17,21 @@ export type FileType = {
   mimeType: string;
 };
 
+type getWrappedTextFragmentsOptions = {
+  context: CanvasRenderingContext2D;
+  text: string;
+  x: number;
+  y: number;
+  maxWidth: number;
+  lineHeight: number;
+};
+
 /**
  * Draws line-wrapping text on a canvas
  */
-const fillWrappingText = (
-  context: CanvasRenderingContext2D,
-  text: string,
-  x: number,
-  y: number,
-  maxWidth: number,
-  lineHeight: number
+const getWrappedTextFragments = (
+  onTextWrapped: (textFragment: string, x: number, y: number) => any,
+  { context, text, x, y, maxWidth, lineHeight }: getWrappedTextFragmentsOptions
 ) => {
   let current = '';
   let yPos = y;
@@ -39,7 +44,7 @@ const fillWrappingText = (
     // Line exceeds width, so all previous words should be drawn and the
     // next word should go in the next line.
     if (width > maxWidth) {
-      context.fillText(current, x, yPos);
+      onTextWrapped(current, x, yPos);
       yPos += lineHeight;
       current = words[n] + ' ';
     } else {
@@ -47,7 +52,17 @@ const fillWrappingText = (
     }
   }
   // Draw remaining text.
-  context.fillText(current, x, yPos);
+  onTextWrapped(current, x, yPos);
+};
+
+const getTextCenter = (
+  context: CanvasRenderingContext2D,
+  text: string,
+  x: number,
+  y: number
+) => {
+  const { width } = context.measureText(text);
+  return [x - width / 2, y];
 };
 
 const Canvas = React.forwardRef<CanvasRef, CanvasProps>(
@@ -83,17 +98,55 @@ const Canvas = React.forwardRef<CanvasRef, CanvasProps>(
         if (context) {
           context.drawImage(image, 0, 0);
 
-          texts.forEach(({ text, size, font, color, position, offset }) => {
-            const yPos = position === 'top' ? size : image.height - size / 2;
-            const [x, y] = [image.width / 2, yPos + offset];
+          texts.forEach(
+            ({
+              text,
+              size,
+              font,
+              color,
+              position,
+              offset,
+              strokeColor,
+              strokeSize,
+            }) => {
+              context.textAlign = 'left';
+              context.textBaseline = 'middle';
+              context.font = `${size}px ${font}`;
 
-            context.font = `${size}px ${font}`;
-            context.fillStyle = color;
-            context.textAlign = 'center';
-            context.textBaseline = 'middle';
+              const yPos = position === 'top' ? size : image.height - size / 2;
+              const [x, y] = [image.width / 2, yPos + offset];
 
-            fillWrappingText(context, text, x, y, image.width, size);
-          });
+              const textOptions = {
+                context,
+                text,
+                x,
+                y,
+                maxWidth: image.width,
+                lineHeight: size,
+              };
+
+              if (strokeSize && strokeColor) {
+                getWrappedTextFragments((fragText, fragX, fragY) => {
+                  const [cx, cy] = getTextCenter(
+                    context,
+                    fragText,
+                    fragX,
+                    fragY
+                  );
+                  context.strokeStyle = strokeColor;
+                  context.lineWidth = strokeSize;
+                  context.miterLimit = 2; // prevents weird peaks of font edges
+                  context.strokeText(fragText, cx, cy);
+                }, textOptions);
+              }
+
+              getWrappedTextFragments((fragText, fragX, fragY) => {
+                const [cx, cy] = getTextCenter(context, fragText, fragX, fragY);
+                context.fillStyle = color;
+                context.fillText(fragText, cx, cy);
+              }, textOptions);
+            }
+          );
         }
       }
     }, [image, texts]);

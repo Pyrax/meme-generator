@@ -30,10 +30,10 @@ const EditorItemText = ({
         <FaFont className="w-full h-auto" aria-label="Text element" />
         <div className="truncate text-center text-xs">{textKey}</div>
       </div>
-      <div>
+      <div className="text-sm">
         <div className="flex gap-4">
           <label className="flex items-center gap-2">
-            Text:{' '}
+            Text:
             <Input
               type="text"
               value={item.text}
@@ -46,7 +46,7 @@ const EditorItemText = ({
             />
           </label>
           <label className="flex items-center justify-end gap-2 w-32 group">
-            Color:{' '}
+            Color:
             <Colorpicker
               color={item.color}
               onChange={(color) => changeHandler({ ...item, color })}
@@ -54,8 +54,8 @@ const EditorItemText = ({
           </label>
         </div>
         <div className="flex gap-4 mt-2">
-          <label className="flex items-center gap-2 w-[108px]">
-            Size:{' '}
+          <label className="flex items-center gap-2 w-28">
+            Size:
             <Input
               type="number"
               value={item.size}
@@ -68,7 +68,7 @@ const EditorItemText = ({
             />
           </label>
           <label className="flex items-center gap-2 grow">
-            Font:{' '}
+            Font:
             <Select
               value={item.font}
               className="h-full"
@@ -83,8 +83,8 @@ const EditorItemText = ({
           </label>
         </div>
         <div className="flex gap-4 mt-2">
-          <label className="flex items-center gap-2 w-[128px]">
-            Offset:{' '}
+          <label className="flex items-center gap-2 w-32">
+            Offset:
             <Input
               type="number"
               value={item.offset}
@@ -93,6 +93,28 @@ const EditorItemText = ({
                   ...item,
                   offset: parseInt(event.target.value),
                 })
+              }
+            />
+          </label>
+          <label className="flex items-center gap-2 w-32">
+            Stroke:
+            <Input
+              type="number"
+              value={item.strokeSize}
+              onChange={(event) =>
+                changeHandler({
+                  ...item,
+                  strokeSize: parseInt(event.target.value),
+                })
+              }
+            />
+          </label>
+          <label className="flex items-center justify-end gap-2 w-32 group">
+            Stroke color:
+            <Colorpicker
+              color={item.strokeColor}
+              onChange={(color) =>
+                changeHandler({ ...item, strokeColor: color })
               }
             />
           </label>

@@ -9,6 +9,8 @@ export type TextElement = {
   size: number;
   offset: number;
   color: string;
+  strokeSize: number;
+  strokeColor: string;
 };
 
 export type TextPosition = 'top' | 'bottom';
