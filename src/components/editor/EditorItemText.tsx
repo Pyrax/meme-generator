@@ -30,95 +30,88 @@ const EditorItemText = ({
         <FaFont className="w-full h-auto" aria-label="Text element" />
         <div className="truncate text-center text-xs">{textKey}</div>
       </div>
-      <div className="text-sm">
-        <div className="flex gap-4">
-          <label className="flex items-center gap-2">
-            Text:
-            <Input
-              type="text"
-              value={item.text}
-              onChange={(event) =>
-                changeHandler({
-                  ...item,
-                  text: event.target.value,
-                })
-              }
-            />
-          </label>
-          <label className="flex items-center justify-end gap-2 w-32 group">
-            Color:
-            <Colorpicker
-              color={item.color}
-              onChange={(color) => changeHandler({ ...item, color })}
-            />
-          </label>
-        </div>
-        <div className="flex gap-4 mt-2">
-          <label className="flex items-center gap-2 w-28">
-            Size:
-            <Input
-              type="number"
-              value={item.size}
-              onChange={(event) =>
-                changeHandler({
-                  ...item,
-                  size: parseInt(event.target.value),
-                })
-              }
-            />
-          </label>
-          <label className="flex items-center gap-2 grow">
-            Font:
-            <Select
-              value={item.font}
-              className="h-full"
-              options={FONTS}
-              onChange={(event) =>
-                changeHandler({
-                  ...item,
-                  font: event.target.value as typeof FONTS[number],
-                })
-              }
-            />
-          </label>
-        </div>
-        <div className="flex gap-4 mt-2">
-          <label className="flex items-center gap-2 w-32">
-            Offset:
-            <Input
-              type="number"
-              value={item.offset}
-              onChange={(event) =>
-                changeHandler({
-                  ...item,
-                  offset: parseInt(event.target.value),
-                })
-              }
-            />
-          </label>
-          <label className="flex items-center gap-2 w-32">
-            Stroke:
-            <Input
-              type="number"
-              value={item.strokeSize}
-              onChange={(event) =>
-                changeHandler({
-                  ...item,
-                  strokeSize: parseInt(event.target.value),
-                })
-              }
-            />
-          </label>
-          <label className="flex items-center justify-end gap-2 w-32 group">
-            Stroke color:
-            <Colorpicker
-              color={item.strokeColor}
-              onChange={(color) =>
-                changeHandler({ ...item, strokeColor: color })
-              }
-            />
-          </label>
-        </div>
+      <div className="flex flex-wrap gap-x-4 gap-y-2 text-sm">
+        <label className="flex items-center gap-2 grow">
+          Text:
+          <Input
+            type="text"
+            value={item.text}
+            onChange={(event) =>
+              changeHandler({
+                ...item,
+                text: event.target.value,
+              })
+            }
+          />
+        </label>
+        <label className="flex items-center gap-2 group grow">
+          Color:
+          <Colorpicker
+            color={item.color}
+            onChange={(color) => changeHandler({ ...item, color })}
+          />
+        </label>
+        <label className="flex items-center gap-2 w-28">
+          Size:
+          <Input
+            type="number"
+            value={item.size}
+            onChange={(event) =>
+              changeHandler({
+                ...item,
+                size: parseInt(event.target.value),
+              })
+            }
+          />
+        </label>
+        <label className="flex items-center gap-2 w-48 grow">
+          Font:
+          <Select
+            value={item.font}
+            className="h-full"
+            options={FONTS}
+            onChange={(event) =>
+              changeHandler({
+                ...item,
+                font: event.target.value as typeof FONTS[number],
+              })
+            }
+          />
+        </label>
+        <label className="flex items-center gap-2 w-32">
+          Offset:
+          <Input
+            type="number"
+            value={item.offset}
+            onChange={(event) =>
+              changeHandler({
+                ...item,
+                offset: parseInt(event.target.value),
+              })
+            }
+          />
+        </label>
+        <label className="flex items-center gap-2 w-28">
+          Stroke:
+          <Input
+            type="number"
+            value={item.strokeSize}
+            onChange={(event) =>
+              changeHandler({
+                ...item,
+                strokeSize: parseInt(event.target.value),
+              })
+            }
+          />
+        </label>
+        <div className="grow" />
+        <label className="flex items-center gap-2 group grow">
+          Color:
+          <Colorpicker
+            color={item.strokeColor}
+            onChange={(color) => changeHandler({ ...item, strokeColor: color })}
+          />
+        </label>
       </div>
       <div>
         <ItemRemove onRemove={removeHandler} />

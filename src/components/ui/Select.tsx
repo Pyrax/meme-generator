@@ -10,7 +10,7 @@ const Select = ({ options, className, ...props }: SelectProps) => (
   <select
     className={classNames(
       className,
-      'px-2 py-1 block w-full rounded-md bg-gray-100 border-2 border-gray-200 focus:border-indigo-400 focus:bg-white outline-0'
+      'px-2 py-1 block w-full h-8 rounded-md bg-gray-100 border-2 border-gray-200 focus:border-indigo-400 focus:bg-white outline-0'
     )}
     {...props}
   >

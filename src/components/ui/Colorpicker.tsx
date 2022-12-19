@@ -13,7 +13,7 @@ const PopoverPicker = ({ color, onChange }: ColorpickerProps) => {
   useClickOutside(popover, close);
 
   return (
-    <div className="relative h-full aspect-square group">
+    <div className="relative h-full min-h-[32px] aspect-square group">
       <button
         className="h-full aspect-square rounded-lg border-4 border-gray-200 opacity-75 transition-opacity group-hover:opacity-100 group-focus-within:opacity-100"
         style={{ backgroundColor: color }}
