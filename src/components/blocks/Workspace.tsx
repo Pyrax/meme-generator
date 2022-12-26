@@ -6,11 +6,15 @@ export type WorkspaceProps = {
 };
 
 const Workspace = ({ children, className }: WorkspaceProps) => (
-  <div
-    className={classNames(className, 'grow flex flex-col justify-center p-8')}
-  >
-    {children}
-  </div>
+  <>
+    {/* grow to fill height */}
+    <div className="grow flex">
+      {/* grow to fill width */}
+      <div className="grow flex flex-col justify-center pt-8 px-8">
+        {children}
+      </div>
+    </div>
+  </>
 );
 
 export default Workspace;

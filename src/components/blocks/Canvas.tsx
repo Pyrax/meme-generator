@@ -4,6 +4,7 @@ import { TextElement } from '../../slices/textSlice';
 export type CanvasProps = {
   image: HTMLImageElement;
   texts: TextElement[];
+  className?: string | undefined;
 };
 
 export type CanvasRef = {
@@ -51,7 +52,7 @@ const fillWrappingText = (
 };
 
 const Canvas = React.forwardRef<CanvasRef, CanvasProps>(
-  ({ image, texts }, forwardedRef) => {
+  ({ image, texts, className }, forwardedRef) => {
     const innerRef = React.useRef<HTMLCanvasElement>(null);
 
     const { width = 0, height = 0 } = image;
@@ -99,7 +100,7 @@ const Canvas = React.forwardRef<CanvasRef, CanvasProps>(
     }, [image, texts]);
 
     return (
-      <div>
+      <div className={className}>
         <canvas ref={innerRef} width={width} height={height}>
           Unfortunately, your browser does not support canvas. Please try a
           different browser

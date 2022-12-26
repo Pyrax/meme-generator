@@ -6,7 +6,7 @@ export type ToolbarProps = {
 };
 
 export const Toolbar = ({ children, className }: ToolbarProps) => (
-  <div className={classNames(className, 'm-6 grow max-w-lg')}>{children}</div>
+  <div className={classNames(className, 'p-6 grow max-w-xl')}>{children}</div>
 );
 
 export const ToolbarHeader = ({ children, className }: ToolbarProps) => (
