@@ -25,6 +25,8 @@ const EditorActions = ({ className, onSave, ...props }: EditorActionsProps) => {
     font: 'Arial',
     size: 24,
     color: '#000000',
+    strokeSize: 0,
+    strokeColor: '#ffffff',
   };
 
   const addTextTopHandler = () =>
