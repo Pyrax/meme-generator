@@ -4,6 +4,7 @@ import { TextElement } from '../../slices/textSlice';
 export type CanvasProps = {
   image: HTMLImageElement;
   texts: TextElement[];
+  zoom?: number;
   className?: string | undefined;
 };
 
@@ -52,10 +53,14 @@ const fillWrappingText = (
 };
 
 const Canvas = React.forwardRef<CanvasRef, CanvasProps>(
-  ({ image, texts, className }, forwardedRef) => {
+  ({ image, texts, zoom = 100, className }, forwardedRef) => {
     const innerRef = React.useRef<HTMLCanvasElement>(null);
 
     const { width = 0, height = 0 } = image;
+
+    const scale = zoom / 100.0;
+    const scaledWidth = Math.ceil(width * scale);
+    const scaledHeight = Math.ceil(height * scale);
 
     React.useImperativeHandle(forwardedRef, () => ({
       saveImage({ name = 'meme', extension = 'jpg', mimeType = 'image/jpeg' }) {
@@ -82,6 +87,9 @@ const Canvas = React.forwardRef<CanvasRef, CanvasProps>(
         const context = canvas.getContext('2d');
 
         if (context) {
+          context.save();
+
+          context.scale(scale, scale);
           context.drawImage(image, 0, 0);
 
           texts.forEach(({ text, size, font, color, position, offset }) => {
@@ -95,15 +103,17 @@ const Canvas = React.forwardRef<CanvasRef, CanvasProps>(
 
             fillWrappingText(context, text, x, y, image.width, size);
           });
+
+          context.restore();
         }
       }
-    }, [image, texts]);
+    }, [image, texts, scale]);
 
     return (
       <div className={className}>
-        <canvas ref={innerRef} width={width} height={height}>
+        <canvas ref={innerRef} width={scaledWidth} height={scaledHeight}>
           Unfortunately, your browser does not support canvas. Please try a
-          different browser
+          different browser.
         </canvas>
       </div>
     );

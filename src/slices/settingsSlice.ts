@@ -2,6 +2,7 @@ import { StateCreator } from 'zustand';
 
 export type Settings = {
   showVisualGrid: boolean;
+  zoom: number;
 };
 
 export type SettingsSlice = {
@@ -12,6 +13,7 @@ export type SettingsSlice = {
 
 const defaultSettings = {
   showVisualGrid: true,
+  zoom: 100,
 };
 
 export const createSettingsSlice: StateCreator<

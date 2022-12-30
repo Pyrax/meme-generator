@@ -21,7 +21,7 @@ import {
 const App = () => {
   const image = useStore((state) => state.image);
   const textMap = useStore((state) => state.textMap);
-  const showVisualGrid = useStore((state) => state.settings.showVisualGrid);
+  const { showVisualGrid, zoom } = useStore((state) => state.settings);
 
   const canvasRef = React.useRef<CanvasRef>(null);
 
@@ -80,6 +80,7 @@ const App = () => {
                 className="flex self-start hover:ring-2 hover:ring-sky-200 ring-offset-2 rounded-sm"
                 image={image.element}
                 texts={Object.values(textMap)}
+                zoom={zoom}
                 ref={canvasRef}
               />
             )}
