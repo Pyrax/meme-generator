@@ -16,7 +16,7 @@ const Controls = () => {
   };
 
   return (
-    <div className="flex px-8 py-2 gap-6 shadow-sm bg-slate-50 items-center">
+    <div className="flex px-8 py-2 gap-6 shadow-sm bg-slate-50 items-center sticky left-0">
       <label className="relative">
         <span className="sr-only">Zoom level</span>
         <Input
