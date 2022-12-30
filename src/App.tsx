@@ -1,4 +1,5 @@
 import React from 'react';
+import classNames from 'classnames';
 import { useStore } from './appStore';
 import {
   Toolbar,
@@ -9,6 +10,7 @@ import Logo from './components/blocks/Logo';
 import Workspace from './components/blocks/Workspace';
 import Copyright from './components/blocks/Copyright';
 import SplashScreen from './components/blocks/SplashScreen';
+import Controls from './components/blocks/Controls';
 import Canvas, { CanvasRef } from './components/blocks/Canvas';
 import {
   EditorItemImage,
@@ -19,6 +21,7 @@ import {
 const App = () => {
   const image = useStore((state) => state.image);
   const textMap = useStore((state) => state.textMap);
+  const showVisualGrid = useStore((state) => state.settings.showVisualGrid);
 
   const canvasRef = React.useRef<CanvasRef>(null);
 
@@ -62,7 +65,13 @@ const App = () => {
             )}
           </Toolbar>
         </aside>
-        <section className="grow lg:basis-2/3 flex flex-col pattern-dots pattern-3 pattern-slate-300 overflow-x-auto">
+        <section
+          className={classNames(
+            'grow lg:basis-2/3 flex flex-col overflow-x-auto',
+            { 'pattern-dots pattern-3 pattern-slate-300': showVisualGrid }
+          )}
+        >
+          <Controls />
           <Workspace>
             {!image ? (
               <SplashScreen />
