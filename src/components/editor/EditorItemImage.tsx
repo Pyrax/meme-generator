@@ -10,6 +10,7 @@ export type EditorItemImageProps = {
 const EditorItemImage = ({ ...props }: EditorItemImageProps) => {
   const image = useStore((state) => state.image);
   const removeImage = useStore((state) => state.removeImage);
+  const resetZoom = useStore((state) => state.resetZoom);
 
   if (!image) {
     return <Item {...props}>No image selected.</Item>;
@@ -20,7 +21,10 @@ const EditorItemImage = ({ ...props }: EditorItemImageProps) => {
     originalType,
     element: { height, width },
   } = image;
-  const removeHandler = () => removeImage();
+  const removeHandler = () => {
+    removeImage();
+    resetZoom();
+  };
 
   return (
     <Item {...props}>

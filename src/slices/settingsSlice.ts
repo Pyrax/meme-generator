@@ -9,6 +9,7 @@ export type SettingsSlice = {
   settings: Settings;
   setSettings: (settings: Partial<Settings>) => void;
   resetSettings: () => void;
+  resetZoom: () => void;
 };
 
 const defaultSettings = {
@@ -27,4 +28,8 @@ export const createSettingsSlice: StateCreator<
   setSettings: (settings) =>
     set((state) => ({ settings: { ...state.settings, ...settings } })),
   resetSettings: () => set({ settings: defaultSettings }),
+  resetZoom: () =>
+    set((state) => ({
+      settings: { ...state.settings, zoom: defaultSettings.zoom },
+    })),
 });
