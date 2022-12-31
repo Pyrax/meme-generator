@@ -55,6 +55,7 @@ const EditorItemText = ({
           Size:
           <Input
             type="number"
+            min={0}
             value={item.size}
             onChange={(event) =>
               changeHandler({
@@ -95,6 +96,7 @@ const EditorItemText = ({
           Stroke:
           <Input
             type="number"
+            min={0}
             value={item.strokeSize}
             onChange={(event) =>
               changeHandler({
