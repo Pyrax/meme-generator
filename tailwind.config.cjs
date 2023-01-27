@@ -22,6 +22,8 @@ module.exports = {
     },
   },
   plugins: [
+    require('@tailwindcss/forms'),
+
     // Custom plugin for background patterns:
     plugin(function ({ addUtilities, matchUtilities, theme }) {
       const defaultColor = theme('colors.gray.400');

@@ -4,6 +4,8 @@ import { TextElement } from '../../slices/textSlice';
 export type CanvasProps = {
   image: HTMLImageElement;
   texts: TextElement[];
+  zoom?: number;
+  className?: string | undefined;
 };
 
 export type CanvasRef = {
@@ -17,16 +19,21 @@ export type FileType = {
   mimeType: string;
 };
 
+type getWrappedTextFragmentsOptions = {
+  context: CanvasRenderingContext2D;
+  text: string;
+  x: number;
+  y: number;
+  maxWidth: number;
+  lineHeight: number;
+};
+
 /**
  * Draws line-wrapping text on a canvas
  */
-const fillWrappingText = (
-  context: CanvasRenderingContext2D,
-  text: string,
-  x: number,
-  y: number,
-  maxWidth: number,
-  lineHeight: number
+const getWrappedTextFragments = (
+  onTextWrapped: (textFragment: string, x: number, y: number) => any,
+  { context, text, x, y, maxWidth, lineHeight }: getWrappedTextFragmentsOptions
 ) => {
   let current = '';
   let yPos = y;
@@ -39,7 +46,7 @@ const fillWrappingText = (
     // Line exceeds width, so all previous words should be drawn and the
     // next word should go in the next line.
     if (width > maxWidth) {
-      context.fillText(current, x, yPos);
+      onTextWrapped(current, x, yPos);
       yPos += lineHeight;
       current = words[n] + ' ';
     } else {
@@ -47,14 +54,28 @@ const fillWrappingText = (
     }
   }
   // Draw remaining text.
-  context.fillText(current, x, yPos);
+  onTextWrapped(current, x, yPos);
+};
+
+const getTextCenter = (
+  context: CanvasRenderingContext2D,
+  text: string,
+  x: number,
+  y: number
+) => {
+  const { width } = context.measureText(text);
+  return [x - width / 2, y];
 };
 
 const Canvas = React.forwardRef<CanvasRef, CanvasProps>(
-  ({ image, texts }, forwardedRef) => {
+  ({ image, texts, zoom = 100, className }, forwardedRef) => {
     const innerRef = React.useRef<HTMLCanvasElement>(null);
 
     const { width = 0, height = 0 } = image;
+
+    const scale = zoom / 100.0;
+    const scaledWidth = Math.ceil(width * scale);
+    const scaledHeight = Math.ceil(height * scale);
 
     React.useImperativeHandle(forwardedRef, () => ({
       saveImage({ name = 'meme', extension = 'jpg', mimeType = 'image/jpeg' }) {
@@ -81,28 +102,71 @@ const Canvas = React.forwardRef<CanvasRef, CanvasProps>(
         const context = canvas.getContext('2d');
 
         if (context) {
+          context.save();
+
+          context.scale(scale, scale);
           context.drawImage(image, 0, 0);
 
-          texts.forEach(({ text, size, font, color, position, offset }) => {
-            const yPos = position === 'top' ? size : image.height - size / 2;
-            const [x, y] = [image.width / 2, yPos + offset];
+          texts.forEach(
+            ({
+              text,
+              size,
+              font,
+              color,
+              position,
+              offset,
+              strokeColor,
+              strokeSize,
+            }) => {
+              context.textAlign = 'left';
+              context.textBaseline = 'middle';
+              context.font = `${size}px ${font}`;
 
-            context.font = `${size}px ${font}`;
-            context.fillStyle = color;
-            context.textAlign = 'center';
-            context.textBaseline = 'middle';
+              const yPos = position === 'top' ? size : image.height - size / 2;
+              const [x, y] = [image.width / 2, yPos + offset];
 
-            fillWrappingText(context, text, x, y, image.width, size);
-          });
+              const textOptions = {
+                context,
+                text,
+                x,
+                y,
+                maxWidth: image.width,
+                lineHeight: size,
+              };
+
+              if (strokeSize && strokeColor) {
+                getWrappedTextFragments((fragText, fragX, fragY) => {
+                  const [cx, cy] = getTextCenter(
+                    context,
+                    fragText,
+                    fragX,
+                    fragY
+                  );
+                  context.strokeStyle = strokeColor;
+                  context.lineWidth = strokeSize;
+                  context.miterLimit = 2; // prevents weird peaks of font edges
+                  context.strokeText(fragText, cx, cy);
+                }, textOptions);
+              }
+
+              getWrappedTextFragments((fragText, fragX, fragY) => {
+                const [cx, cy] = getTextCenter(context, fragText, fragX, fragY);
+                context.fillStyle = color;
+                context.fillText(fragText, cx, cy);
+              }, textOptions);
+            }
+          );
+
+          context.restore();
         }
       }
-    }, [image, texts]);
+    }, [image, texts, scale]);
 
     return (
-      <div>
-        <canvas ref={innerRef} width={width} height={height}>
+      <div className={className}>
+        <canvas ref={innerRef} width={scaledWidth} height={scaledHeight}>
           Unfortunately, your browser does not support canvas. Please try a
-          different browser
+          different browser.
         </canvas>
       </div>
     );
